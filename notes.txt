@@ -1,0 +1,4 @@
+maybe redo authorization with https://indominusbyte.github.io/fastapi-jwt-auth/
+wiki https://fastapi.tiangolo.com/
+emphasize data checks for authorization
+redo search table
