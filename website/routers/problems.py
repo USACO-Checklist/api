@@ -5,7 +5,6 @@ from typing import Optional
 from fastapi import APIRouter, Depends, Security, BackgroundTasks, Request, HTTPException, status, Form
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
-from fastapi.concurrency import run_in_threadpool
 
 from sqlalchemy.orm import Session as Database
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -15,16 +14,12 @@ from website.internal import models, schemas, crud
 from website.internal.scripts import web_scrape_problem_cases, admin_web_scrape_problems
 from website.routers.auth import get_current_user_optional, get_current_user_required
 
-from lxml import html
-from pprint import pprint
-import requests
 from requests import Session
-import re
 
 problems = APIRouter()
 templates = Jinja2Templates(directory="website/templates")
 
-SYNC_ALL_DELAY = 0
+SYNC_ALL_DELAY = 300
 
 
 @problems.get("/problems/sync-usaco")
@@ -95,7 +90,7 @@ async def fetch_all_cases(
             detail="Next sync all available in {} seconds".format(SYNC_ALL_DELAY - int(curr_time - last_sync_time)),
         )
     current_user.last_sync_all = curr_time
-    # db.commit()
+    db.commit()
 
     s = Session()
     await login_to_usaco(s, usaco_uname, usaco_password)
