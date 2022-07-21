@@ -190,7 +190,7 @@ async def signup_user(
     return new_user
 
 
-@auth.put('/auth/change-password')
+@auth.post('/auth/change-password')
 async def change_password_of_user(
         username: str = Form(),
         old_password: str = Form(),

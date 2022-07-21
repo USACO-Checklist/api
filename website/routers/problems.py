@@ -57,7 +57,7 @@ async def fetch_all_problems(
     return {'status': 'fetching problems, please wait'}
 
 
-@problems.put('/problems/update', response_model=schemas.ChecklistEntry)
+@problems.post('/problems/update', response_model=schemas.ChecklistEntry)
 async def update_problem_status(
         update_info: schemas.ChecklistEntryUpdate,
         db: AsyncSession = Depends(get_session),

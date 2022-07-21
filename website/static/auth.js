@@ -50,7 +50,7 @@ function change_password(username, old_password, new_password, new_password_conf
     };
 
     $.ajax({
-        type: "PUT",
+        type: "POST",
         url: "/auth/change-password",
         data: formData,
         contentType: "application/x-www-form-urlencoded",

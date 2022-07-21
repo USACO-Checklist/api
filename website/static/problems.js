@@ -226,7 +226,7 @@ function updateStatus(problemCell) {
     };
 
     $.ajax({
-        type: "PUT",
+        type: "POST",
         url: '/problems/update',
         data: JSON.stringify(entryData),
         contentType: "application/json",
