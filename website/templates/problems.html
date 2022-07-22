@@ -40,7 +40,7 @@
 
             <div class="input-group">
                 {% if user != None %}
-                    <input type="text" class="form-control" readonly="" id="static-link" aria-describedby="what" value="49.234.36.140/problems?{{ user.uuid }}">
+                    <input type="text" class="form-control" readonly="" id="static-link" aria-describedby="what" value="49.234.36.140/problems?uuid={{ user.uuid }}">
                     <div class="input-group-append">
                         <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span class="sr-only">Toggle Dropdown</span>
