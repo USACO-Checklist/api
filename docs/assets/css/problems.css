@@ -1,0 +1,55 @@
+table {
+    table-layout: fixed;
+}
+
+
+.table-wrapper {
+    overflow-x: auto;
+}
+
+.contest-header {
+    width: 10%;
+}
+
+.problem-entry {
+    width: 30%;
+}
+
+
+.problem-name {
+    width: 40%;
+}
+
+.problem-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.case-info {
+    max-width: 60%;
+    padding-left: 10px;
+}
+
+.case {
+    width: 20px;
+    height: 20px;
+    display: inline-grid;
+    margin: 1px;
+}
+
+.case-correct {
+    background-color: #EEFFEE;
+    border: 1px solid #339933;
+    color: #339933;
+}
+
+.case-incorrect {
+    background-color: #FFE2E2;
+    border: 1px solid #993333;
+    color: #993333;
+}
+
+.case > div {
+    text-align: center;
+    font-size: small;
+}
