@@ -222,7 +222,7 @@ async def login_user_for_access_token(
         scopes=scopes
     )
     access_token = jwt.encode(token_info.dict(), JWT_SECRET)
-    response.set_cookie(key="access_token", value=f"Bearer {access_token}", httponly=True, samesite="strict")
+    response.set_cookie(key="access_token", value=f"Bearer {access_token}", httponly=True, path='/')
     return {'access_token': access_token, 'token_type': 'bearer'}
 
 
