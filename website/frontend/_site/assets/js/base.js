@@ -1,4 +1,4 @@
-var API_URL = "http://127.0.0.1:8000";
+var API_URL = "http://49.234.36.140/";
 
 $(document).ready(function () {
     $("#logout-link").click(function (event) {
