@@ -21,12 +21,12 @@ problems = APIRouter()
 templates = Jinja2Templates(directory="website/templates")
 
 
-@problems.get("/problems/sync-usaco")
-async def sync_usaco_data(
-        request: Request,
-        current_user: schemas.User = Security(get_current_user_required, scopes=['me'])
-):
-    return templates.TemplateResponse("sync-usaco.html", {"request": request, "user": current_user})
+# @problems.get("/problems/sync-usaco")
+# async def sync_usaco_data(
+#         request: Request,
+#         current_user: schemas.User = Security(get_current_user_required, scopes=['me'])
+# ):
+#     return templates.TemplateResponse("sync-usaco.html", {"request": request, "user": current_user})
 
 
 async def login_to_usaco(
@@ -124,16 +124,15 @@ async def get_checklist_info(
         cases.append(checklist_entry_case.as_dict())
     return {'entries': json.dumps(entries), 'cases': json.dumps(cases)}
 
-
-@problems.get('/problems', response_class=HTMLResponse)
-async def view_other_problems(
-        request: Request,
-        uuid: Optional[str] = None,
-        db: AsyncSession = Depends(get_session),
-        current_user: schemas.User = Depends(get_current_user_optional)
-):
-    if uuid:
-        list_author = await crud.get_user_by_uuid(db, uuid)
-    else:
-        list_author = current_user
-    return templates.TemplateResponse("problems.html", {"request": request, "user": current_user, "list_author": list_author})
+# @problems.get('/problems', response_class=HTMLResponse)
+# async def view_other_problems(
+#         request: Request,
+#         uuid: Optional[str] = None,
+#         db: AsyncSession = Depends(get_session),
+#         current_user: schemas.User = Depends(get_current_user_optional)
+# ):
+#     if uuid:
+#         list_author = await crud.get_user_by_uuid(db, uuid)
+#     else:
+#         list_author = current_user
+#     return templates.TemplateResponse("problems.html", {"request": request, "user": current_user, "list_author": list_author})

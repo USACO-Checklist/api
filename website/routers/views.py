@@ -18,20 +18,9 @@ async def do_something(db: AsyncSession):
     for user in users:
         print(user.username)
 
-
-@views.get("/users/", response_class=HTMLResponse)
-async def read_users(
-        request: Request,
-        tasks: BackgroundTasks,
-        db: AsyncSession = Depends(get_session)
-):
-    tasks.add_task(do_something, db)
-    return templates.TemplateResponse("home.html", {"request": request})
-
-
-@views.get('/', response_class=HTMLResponse)
-async def home(
-        request: Request,
-        current_user: Optional[schemas.User] = Depends(get_current_user_optional)
-):
-    return templates.TemplateResponse("home.html", {"request": request, "user": current_user})
+# @views.get('/', response_class=HTMLResponse)
+# async def home(
+#         request: Request,
+#         current_user: Optional[schemas.User] = Depends(get_current_user_optional)
+# ):
+#     return templates.TemplateResponse("home.html", {"request": request, "user": current_user})
