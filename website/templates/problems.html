@@ -8,7 +8,8 @@
 {% endblock %}
 {% block content %}
     <br/>
-    <h1 style="text-align:center;">{% if user == list_author %}Problems{% else %}{{ list_author.username }}'s Checklist{% endif %}</h1>
+    <h1 style="text-align:center;">{% if user == list_author %}Problems{% else %}{{ list_author.username }}'s
+        Checklist{% endif %}</h1>
     <br/>
     <div class="row justify-content-between">
         <div class="col col-md-5">
@@ -33,16 +34,19 @@
         </div>
         <div class="col col-md-3">
             <h4>Search:&nbsp;</h4>
-            <input type="text" class="form-control" id="search-input" onkeyup="filterTable(curD)" placeholder="Search for names..">
+            <input type="text" class="form-control" id="search-input" onkeyup="filterTable(curD)"
+                   placeholder="Search for names..">
         </div>
         <div class="col col-md-4">
             <h4>Share List:&nbsp;</h4>
 
             <div class="input-group">
                 {% if user != None %}
-                    <input type="text" class="form-control" readonly="" id="static-link" aria-describedby="what" value="49.234.36.140/problems?uuid={{ user.uuid }}">
+                    <input type="text" class="form-control" readonly="" id="static-link" aria-describedby="what"
+                           value="usaco.raybb.me/problems?uuid={{ user.uuid }}">
                     <div class="input-group-append">
-                        <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span class="sr-only">Toggle Dropdown</span>
                         </button>
                         <div class="dropdown-menu dropdown-menu-right">
@@ -54,7 +58,8 @@
                 {% else %}
                     <input type="text" class="form-control" readonly="" value="Log in to share">
                     <div class="input-group-append">
-                        <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span class="sr-only">Toggle Dropdown</span>
                         </button>
                         <div class="dropdown-menu dropdown-menu-right">
