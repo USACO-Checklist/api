@@ -116,6 +116,12 @@ async def get_checklist_info(
         uuid: str,
         db: AsyncSession = Depends(get_session)
 ):
+    user = crud.get_user_by_uuid(db, uuid)
+    if not user:
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail="No user with this uuid",
+        )
     entries = []
     for checklist_entry in await crud.get_checklist_of_uuid(db, uuid):
         entries.append(checklist_entry.as_dict())
