@@ -2,7 +2,7 @@ import time
 
 from fastapi import FastAPI, Request
 from fastapi.staticfiles import StaticFiles
-from fastapi.middleware.cors import CORSMiddleware
+from starlette.middleware.cors import CORSMiddleware
 
 from website.routers.views import views
 from website.routers.auth import auth
