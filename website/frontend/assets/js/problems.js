@@ -34,7 +34,7 @@ function init() {
     var tempUUID = getUrlParameter('uuid');
     if (!tempUUID) { //not viewing other
         listUUID = localStorage.getItem('uuid');
-        if (listUUID == null) { //user not logged in
+        if (listUUID === "null") { //user not logged in
             viewMode = 2;
         } else { //user logged in, viewing own
             viewMode = 0;
