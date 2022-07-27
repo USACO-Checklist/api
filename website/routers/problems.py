@@ -12,14 +12,13 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from website.internal.database import get_session, get_sync_session
 from website.internal import models, schemas, crud
 from website.internal.scripts import web_scrape_problem_cases, admin_web_scrape_problems
+from website.internal.config import SYNC_ALL_DELAY
 from website.routers.auth import get_current_user_optional, get_current_user_required
 
 from requests import Session
 
 problems = APIRouter()
 templates = Jinja2Templates(directory="website/templates")
-
-SYNC_ALL_DELAY = 300
 
 
 @problems.get("/problems/sync-usaco")

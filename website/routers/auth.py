@@ -12,6 +12,7 @@ from fastapi.responses import HTMLResponse
 
 from website.internal import models, schemas, crud
 from website.internal.database import get_session
+from website.internal.config import JWT_SECRET, JWT_ALG, JWT_EXPIRE_SECONDS
 
 auth = APIRouter()
 templates = Jinja2Templates(directory="website/templates")
@@ -50,9 +51,6 @@ oauth2_scheme = OAuth2PasswordBearerWithCookie(
     tokenUrl='auth/login-user',
     scopes={'me': 'Read information about the current user.', 'admin': 'Fetch problem list and add contests.'}
 )
-JWT_SECRET = '01e40851a7d55710066b587804f0094197441cfdd2bf931b7abf7318cb05edaf'
-JWT_ALG = "HS256"
-JWT_EXPIRE_SECONDS = 10800
 
 
 async def get_user_from_token(

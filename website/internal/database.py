@@ -6,7 +6,7 @@ from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-SQLALCHEMY_DATABASE_URL = "sqlite+aiosqlite:///./database.db"
+from website.internal.config import SQLALCHEMY_DATABASE_URL, SYNC_SQLALCHEMY_DATABASE_URL
 
 engine = create_async_engine(SQLALCHEMY_DATABASE_URL, future=True, echo=False)
 async_session = sessionmaker(bind=engine, expire_on_commit=False, class_=AsyncSession)
@@ -30,8 +30,6 @@ async def get_session() -> AsyncSession:
 if not path.exists("./database.db"):
     asyncio.create_task(init_models())
     print("Created Database!")
-
-SYNC_SQLALCHEMY_DATABASE_URL = "sqlite:///./database.db"
 
 sync_engine = create_engine(SYNC_SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False})
 sync_session = sessionmaker(bind=sync_engine, expire_on_commit=False, autocommit=False, autoflush=False)
