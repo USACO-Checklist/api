@@ -116,6 +116,11 @@ async def get_checklist_info(
         uuid: str,
         db: AsyncSession = Depends(get_session)
 ):
+    if uuid is None:
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail="UUID cannot be null",
+        )
     user = crud.get_user_by_uuid(db, uuid)
     if not user:
         raise HTTPException(
