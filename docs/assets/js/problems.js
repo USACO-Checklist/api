@@ -236,6 +236,8 @@ function updateStatus(problemCell) {
         "problem_id": parseInt(problemCell.id.substring(7))
     };
 
+    console.log(entryData);
+
     $.ajax({
         type: "POST",
         url: API_URL + '/problems/update',

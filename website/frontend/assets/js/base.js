@@ -1,4 +1,4 @@
-var API_URL = "http://49.234.36.140";
+var API_URL = "https://49.234.36.140";
 // var API_URL = "http://127.0.0.1:8000"
 
 $(document).ready(function () {

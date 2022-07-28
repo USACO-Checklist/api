@@ -1,4 +1,5 @@
 var API_URL = "https://49.234.36.140";
+// var API_URL = "http://127.0.0.1:8000"
 
 $(document).ready(function () {
     $("#logout-link").click(function (event) {
@@ -36,6 +37,10 @@ function init_nav() {
             var dropdownUser = $("#dropdown-username");
             dropdownUser.text('\xa0' + response['username']);
             dropdownUser.prepend('<i class="fa fa-user"></i>');
+
+            if (window.location.pathname == '/problems') {
+                init();
+            }
         },
         error: function (response) {
             var errors = $.parseJSON(response.responseText);
