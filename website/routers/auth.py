@@ -243,7 +243,7 @@ async def logout_user(
         response: Response,
         current_user: schemas.User = Security(get_current_user_required, scopes=['me'])
 ):
-    response.delete_cookie("access_token")
+    response.delete_cookie("access_token", httponly=True, path='/', samesite="None", secure=True)
     return
 
 
