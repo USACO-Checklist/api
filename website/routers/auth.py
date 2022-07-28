@@ -222,7 +222,8 @@ async def login_user_for_access_token(
         scopes=scopes
     )
     access_token = jwt.encode(token_info.dict(), JWT_SECRET)
-    response.set_cookie(key="access_token", value=f"Bearer {access_token}", httponly=True, path='/', samesite="None")
+    response.set_cookie(key="access_token", value=f"Bearer {access_token}", httponly=True, path='/', samesite="None",
+                        secure=True)
     return {'access_token': access_token, 'token_type': 'bearer'}
 
 
@@ -242,7 +243,7 @@ async def logout_user(
         response: Response,
         current_user: schemas.User = Security(get_current_user_required, scopes=['me'])
 ):
-    response.delete_cookie("access_token", httponly=True, path='/', samesite="None")
+    response.delete_cookie("access_token", httponly=True, path='/', samesite="None", secure=True)
     return
 
 
