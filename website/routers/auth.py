@@ -19,7 +19,7 @@ auth = APIRouter()
 templates = Jinja2Templates(directory="website/templates")
 
 
-class OAuth2PasswordBearerWithCookie(OAuth2):
+class OAuth2PasswordBearerCustom(OAuth2):
     def __init__(
             self,
             tokenUrl: str,
@@ -33,8 +33,7 @@ class OAuth2PasswordBearerWithCookie(OAuth2):
         super().__init__(flows=flows, scheme_name=scheme_name, auto_error=auto_error)
 
     async def __call__(self, request: Request) -> Optional[str]:
-        authorization: str = request.cookies.get("access_token")  # changed to accept access token from httpOnly Cookie
-
+        authorization: str = request.headers.get("Authorization")
         scheme, param = get_authorization_scheme_param(authorization)
         # if not authorization or scheme.lower() != "bearer":
         #     if self.auto_error:
@@ -48,7 +47,7 @@ class OAuth2PasswordBearerWithCookie(OAuth2):
         return param
 
 
-oauth2_scheme = OAuth2PasswordBearerWithCookie(
+oauth2_scheme = OAuth2PasswordBearerCustom(
     tokenUrl='auth/login-user',
     scopes={'me': 'Read information about the current user.', 'admin': 'Fetch problem list and add contests.'}
 )
@@ -205,7 +204,6 @@ async def change_password_of_user(
 
 @auth.post('/auth/login-user')
 async def login_user_for_access_token(
-        response: Response,
         form_data: OAuth2PasswordRequestForm = Depends(),
         db: AsyncSession = Depends(get_session)
 ):
@@ -222,8 +220,8 @@ async def login_user_for_access_token(
         scopes=scopes
     )
     access_token = jwt.encode(token_info.dict(), JWT_SECRET)
-    response.set_cookie(key="access_token", value=f"Bearer {access_token}", httponly=True, path='/', samesite="None",
-                        secure=True)
+    # response.set_cookie(key="access_token", value=f"Bearer {access_token}", httponly=True, path='/', samesite="None",
+    #                     secure=True)
     return {'access_token': access_token, 'token_type': 'bearer'}
 
 
@@ -240,10 +238,9 @@ async def signup_user_to_database(
 
 @auth.post('/auth/logout-user')
 async def logout_user(
-        response: Response,
         current_user: schemas.User = Security(get_current_user_required, scopes=['me'])
 ):
-    response.delete_cookie("access_token", httponly=True, path='/', samesite="None", secure=True)
+    # response.delete_cookie("access_token", httponly=True, path='/', samesite="None", secure=True)
     return
 
 

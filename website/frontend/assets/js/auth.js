@@ -55,6 +55,9 @@ function change_password(username, old_password, new_password, new_password_conf
         xhrFields: {
             withCredentials: true
         },
+        headers: {
+            Authorization: "Bearer " + localStorage.getItem("access_token")
+        },
         data: formData,
         contentType: "application/x-www-form-urlencoded",
         success: function () {
@@ -90,9 +93,13 @@ function login(username, password) {
         xhrFields: {
             withCredentials: true
         },
+        headers: {
+            Authorization: "Bearer " + localStorage.getItem("access_token")
+        },
         data: formData,
         contentType: "application/x-www-form-urlencoded",
-        success: function () {
+        success: function (response) {
+            localStorage.setItem('access_token', response['access_token']);
             window.location.assign("/problems");
         },
         error: function (response) {
@@ -128,6 +135,9 @@ function signup(username, password, password_confirm) {
         url: API_URL + "/auth/signup-user",
         xhrFields: {
             withCredentials: true
+        },
+        headers: {
+            Authorization: "Bearer " + localStorage.getItem("access_token")
         },
         data: formData,
         contentType: "application/x-www-form-urlencoded",

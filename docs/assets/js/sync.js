@@ -29,6 +29,9 @@ function syncUsaco(username, password) {
         xhrFields: {
             withCredentials: true
         },
+        headers: {
+            Authorization: "Bearer " + localStorage.getItem("access_token")
+        },
         data: formData,
         contentType: "application/x-www-form-urlencoded",
         success: function () {

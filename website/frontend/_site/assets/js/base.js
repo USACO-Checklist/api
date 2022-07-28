@@ -1,4 +1,4 @@
-var API_URL = "https://49.234.36.140";
+var API_URL = "http://49.234.36.140";
 // var API_URL = "http://127.0.0.1:8000"
 
 $(document).ready(function () {
@@ -19,6 +19,9 @@ function init_nav() {
         url: API_URL + "/auth/current-user",
         xhrFields: {
             withCredentials: true
+        },
+        headers: {
+            Authorization: "Bearer " + localStorage.getItem("access_token")
         },
         success: function (response) {
             if (response['status'] == 1) {
@@ -60,7 +63,11 @@ function logout() {
         xhrFields: {
             withCredentials: true
         },
+        headers: {
+            Authorization: "Bearer " + localStorage.getItem("access_token")
+        },
         success: function () {
+            localStorage.removeItem("access_token");
             window.location.assign('/');
         },
         error: function (response) {

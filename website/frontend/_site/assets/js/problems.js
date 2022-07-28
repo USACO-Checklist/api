@@ -94,6 +94,9 @@ function fetchProblemInfo() {
         xhrFields: {
             withCredentials: true
         },
+        headers: {
+            Authorization: "Bearer " + localStorage.getItem("access_token")
+        },
         contentType: "application/json",
         success: function (response) {
             var problemInfo = JSON.parse(JSON.stringify(response));
@@ -119,6 +122,9 @@ function fetchChecklistInfo() {
         url: API_URL + "/problems/get-checklist-info/" + listUUID,
         xhrFields: {
             withCredentials: true
+        },
+        headers: {
+            Authorization: "Bearer " + localStorage.getItem("access_token")
         },
         contentType: "application/json",
         success: function (response) {
@@ -236,13 +242,14 @@ function updateStatus(problemCell) {
         "problem_id": parseInt(problemCell.id.substring(7))
     };
 
-    console.log(entryData);
-
     $.ajax({
         type: "POST",
         url: API_URL + '/problems/update',
         xhrFields: {
             withCredentials: true
+        },
+        headers: {
+            Authorization: "Bearer " + localStorage.getItem("access_token")
         },
         data: JSON.stringify(entryData),
         contentType: "application/json",
